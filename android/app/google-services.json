@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "537626293208",
+    "project_id": "tharagathi-cccce",
+    "storage_bucket": "tharagathi-cccce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537626293208:android:c29299c27c45f0f9bcb8ad",
+        "android_client_info": {
+          "package_name": "com.example.tharagathi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBz2wLxaZPpySi4MDtLnx4ifALxZ4HvoCc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
