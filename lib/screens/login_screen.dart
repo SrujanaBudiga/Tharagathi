@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../services/authentication_service.dart';
@@ -18,6 +19,23 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   late User _user;
+  final TapGestureRecognizer _tapGestureRecognizer = TapGestureRecognizer();
+
+  @override
+  void initState() {
+    _tapGestureRecognizer.onTap = () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SignUpScreen(
+            texts: [Text('Teacher'), Text('Student')],
+            selected: (int) {},
+          ),
+        ),
+      );
+    };
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       return null;
                     },
                   ),
-                  Row(
+                  Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(20.0),
@@ -95,21 +113,39 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const Text('Login'),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SignUpScreen(
-                                  texts: [Text('Teacher'), Text('Student')],
-                                  selected: (int) {},
-                                ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(20.0),
+                      //   child: ElevatedButton(
+                      //     onPressed: () async {
+                      //       Navigator.pushReplacement(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //           builder: (context) => SignUpScreen(
+                      //             texts: [Text('Teacher'), Text('Student')],
+                      //             selected: (int) {},
+                      //           ),
+                      //         ),
+                      //       );
+                      //     },
+                      //     child: const Text('Signup'),
+                      //   ),
+                      // ),
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            const TextSpan(
+                              text: 'New User? ',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            TextSpan(
+                              text: 'Sign up',
+                              style: const TextStyle(
+                                color: Colors.blue,
+                                decoration: TextDecoration.underline,
                               ),
-                            );
-                          },
-                          child: const Text('Signup'),
+                              recognizer: _tapGestureRecognizer,
+                            ),
+                          ],
                         ),
                       ),
                     ],
