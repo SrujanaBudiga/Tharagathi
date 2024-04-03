@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:googleapis/acmedns/v1.dart';
 import 'package:provider/provider.dart';
@@ -33,11 +34,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // late bool _isTeacher = false;
   bool _isTeacher = false;
   late List<bool> isSelected = [];
+  final TapGestureRecognizer _tapGestureRecognizer = TapGestureRecognizer();
 
   @override
   void initState() {
-    widget.texts.forEach((e) => isSelected.add(false));
+    isSelected = List.generate(widget.texts.length, (index) => index == 1);
     _isTeacher = false;
+    _tapGestureRecognizer.onTap = () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginScreen(),
+        ),
+      );
+    };
     super.initState();
   }
 
@@ -150,7 +160,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
               ),
-              Row(
+              Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -168,18 +178,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   //just for testing to go back to login page
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        const TextSpan(
+                          text: 'Already have an account? ',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        TextSpan(
+                          text: 'Sign in',
+                          style: const TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
                           ),
-                        );
-                      },
-                      child: const Text('Login-page'),
+                          recognizer: _tapGestureRecognizer,
+                        ),
+                      ],
                     ),
                   ),
                 ],
